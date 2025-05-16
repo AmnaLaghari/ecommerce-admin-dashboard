@@ -56,8 +56,8 @@
   
 <script setup>
   import { ref, onMounted, computed } from 'vue'
-  import UpdateStockModal from './UpdateStockModal.vue'
-  import ProductFilters from './ProductFilters.vue'
+  import UpdateStockModal from '../components/modal/UpdateStockModal.vue'
+  import ProductFilters from '../components/filters/ProductFilters.vue'
   
   const products = ref([])
   const loading = ref(true)

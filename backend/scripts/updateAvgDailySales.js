@@ -42,3 +42,5 @@ updateAvgDailySalesForAllProducts()
     .finally(() => {
         prisma.$disconnect()
     })
+
+module.exports = { updateAvgDailySalesForAllProducts }
