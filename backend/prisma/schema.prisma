@@ -16,6 +16,7 @@ model Product {
   stock       Int
   images      String
   category    String
+  avgDailySales  Float     @default(0)
   createdAt   DateTime    @default(now())
 
   orderItems  OrderItem[]

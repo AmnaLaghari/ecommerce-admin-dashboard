@@ -37,7 +37,25 @@ const addProduct = async (req, res) => {
   }
 }
 
+const updateProductStock = async (req, res) => {
+  const productId = parseInt(req.params.id)
+  const { stock } = req.body
+
+  try {
+    const updatedProduct = await prisma.product.update({
+      where: { id: productId },
+      data: { stock: parseInt(stock) }
+    })
+
+    res.status(200).json(updatedProduct)
+  } catch (err) {
+    console.error('❌ Error updating stock:', err)
+    res.status(500).json({ message: 'Failed to update stock' })
+  }
+}
+
 module.exports = {
   addProduct,
-  getProducts
+  getProducts,
+  updateProductStock
 }

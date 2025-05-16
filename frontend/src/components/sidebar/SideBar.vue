@@ -22,7 +22,7 @@ export default {
 
     <SidebarLink to="/" icon="fa fa-columns">Dashboard</SidebarLink>
     <SidebarLink to="/inventory" icon="fas fa-chart-bar">Inventory</SidebarLink>
-    <SidebarLink to="/add-product" icon="fas fa-users">App Products</SidebarLink>
+    <SidebarLink to="/add-product" icon="fas fa-users">Add Products</SidebarLink>
 
     <span
       class="collapse-icon"

@@ -50,7 +50,7 @@
               <img :src="imagePreview" alt="preview" style="max-width: 150px;" />
             </div>
       
-            <button type="submit">Add Product</button>
+            <button class="button-primary" type="submit">Add Product</button>
           </form>
         </div>
       </div>
