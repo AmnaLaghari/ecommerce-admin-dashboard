@@ -107,7 +107,7 @@
 
   async function saveStock(updatedProduct) {
     try {
-      const res = await fetch(`http://localhost:3000/api/products/${updatedProduct.id}/stock`, {
+      const res = await fetch(`${import.meta.env.VITE_API_URL}/api/products/${updatedProduct.id}/stock`, {
         method: 'PUT',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ stock: updatedProduct.stock })
@@ -158,7 +158,7 @@
 
   onMounted(async () => {
     try {
-      const res = await fetch('http://localhost:3000/api/products')
+      const res = await fetch(`${import.meta.env.VITE_API_URL}/api/products`)
       const data = await res.json()
       products.value = data
     } catch (err) {

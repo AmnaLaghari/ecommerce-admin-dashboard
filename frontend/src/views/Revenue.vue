@@ -63,15 +63,15 @@ const revenueSplit = ref([])
 const topHighlight = ref({ topCategory: {}, topProduct: {} })
 
 onMounted(async () => {
-	const res_summary = await fetch('http://localhost:3000/api/revenue/summary')
+	const res_summary = await fetch(`${import.meta.env.VITE_API_URL}/api/revenue/summary0`)
 	summary.value = await res_summary.json()
-	const res_rev = await fetch('http://localhost:3000/api/revenue/sales-over-time?groupBy=daily')
+	const res_rev = await fetch(`${import.meta.env.VITE_API_URL}/api/revenue/sales-over-time?groupBy=daily`)
 	revenueData.value = await res_rev.json()
-	const res_catg = await fetch('http://localhost:3000/api/revenue/orders-by-category')
+	const res_catg = await fetch(`${import.meta.env.VITE_API_URL}/api/revenue/orders-by-category`)
 	categoryOrders.value = await res_catg.json()
-	const res_rev_catg = await fetch('http://localhost:3000/api/revenue/revenue-by-category')
+	const res_rev_catg = await fetch(`${import.meta.env.VITE_API_URL}/api/revenue/revenue-by-category`)
 	revenueSplit.value = await res_rev_catg.json()
-	const res_top = await fetch('http://localhost:3000/api/revenue/top-single')
+	const res_top = await fetch(`${import.meta.env.VITE_API_URL}/api/revenue/top-single`)
 	topHighlight.value = await res_top.json()
 	console.log(topHighlight.value);
 

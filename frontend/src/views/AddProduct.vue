@@ -93,7 +93,7 @@
 
     try {
       console.log(formData)
-      const res = await fetch('http://localhost:3000/api/products', {
+      const res = await fetch(`${import.meta.env.VITE_API_URL}/api/products`, {
         method: 'POST',
         body: formData
       })

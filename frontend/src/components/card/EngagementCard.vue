@@ -34,7 +34,7 @@
   const summary = ref({ avgDAU: 0, avgDailyBuyers: 0, conversionRate: 0 })
   
   onMounted(async () => {
-    const res = await fetch('http://localhost:3000/api/revenue/engagement-summary')
+    const res = await fetch(`${import.meta.env.VITE_API_URL}/api/revenue/engagement-summary`)
     summary.value = await res.json()
   })
   const circleStyle = computed(() => ({

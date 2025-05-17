@@ -10,7 +10,7 @@
   import Chart from 'chart.js/auto'
   
   onMounted(async () => {
-    const res = await fetch('http://localhost:3000/api/revenue')
+    const res = await fetch(`${import.meta.env.VITE_API_URL}/api/revenue`)
     const data = await res.json()
   
     const chart = new Chart(document.getElementById('revenueChart'), {
