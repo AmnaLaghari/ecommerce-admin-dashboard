@@ -50,37 +50,57 @@ const getRevenueSummary = async (req, res) => {
 
 
 const getRevenueOverTime = async (req, res) => {
-  const groupBy = req.query.groupBy || 'daily' // 'daily', 'weekly', 'monthly'
+  const groupBy = req.query.groupBy || 'weekly'
 
-  const groupFormat = groupBy === 'monthly'
-    ? 'YYYY-MM'
-    : groupBy === 'weekly'
-    ? 'YYYY-[W]WW'
-    : 'YYYY-MM-DD'
+  let dateTrunc
+  if (groupBy === 'monthly') dateTrunc = 'month'
+  else if (groupBy === 'weekly') dateTrunc = 'week'
+  else dateTrunc = 'day'
 
   try {
-    const orders = await prisma.orderItem.findMany({
-      include: {
-        order: true
+    const result = await prisma.orderItem.groupBy({
+      by: ['orderId'],
+      _sum: {
+        quantity: true,
+        price: true
       }
     })
 
+    const orders = await prisma.order.findMany({
+      where: {
+        id: { in: result.map(r => r.orderId) }
+      },
+      select: {
+        id: true,
+        createdAt: true
+      }
+    })
+
+    const orderMap = Object.fromEntries(orders.map(o => [o.id, o.createdAt]))
+
     const revenueMap = {}
 
-    for (const item of orders) {
-      const dateKey = dayjs(item.order.createdAt).format(groupFormat)
-      const revenue = item.quantity * item.price
+    for (const r of result) {
+      const createdAt = orderMap[r.orderId]
+      if (!createdAt) continue
 
-      revenueMap[dateKey] = (revenueMap[dateKey] || 0) + revenue
+      const date = dayjs(createdAt).startOf(dateTrunc).format(
+        groupBy === 'monthly' ? 'YYYY-MM' :
+        groupBy === 'weekly' ? 'YYYY-[W]WW' :
+        'YYYY-MM-DD'
+      )
+
+      const revenue = (r._sum.quantity ?? 0) * (r._sum.price ?? 0)
+      revenueMap[date] = (revenueMap[date] || 0) + revenue
     }
 
-    const result = Object.entries(revenueMap)
+    const finalData = Object.entries(revenueMap)
       .map(([date, revenue]) => ({ date, revenue }))
       .sort((a, b) => new Date(a.date) - new Date(b.date))
-
-    res.json(result)
+      
+    res.json(finalData)
   } catch (err) {
-    console.error('Failed to fetch revenue:', err)
+    console.error('Failed to fetch revenue over time:', err)
     res.status(500).json({ message: 'Failed to fetch revenue over time' })
   }
 }
@@ -203,4 +223,26 @@ const getTopCategoryAndProduct = async (req, res) => {
   }
 }
 
-module.exports = { getRevenueSummary, getRevenueOverTime, getOrdersByCategory, getEngagementSummary, getRevenueByCategory, getTopCategoryAndProduct }
+const getMonthlyRevenue = async (req, res) => {
+  const dayjs = require('dayjs')
+  const orders = await prisma.orderItem.findMany({
+    include: { order: true }
+  })
+
+  const revenueByMonth = {}
+
+  for (const item of orders) {
+    const monthKey = dayjs(item.order.createdAt).format('YYYY-MM')
+    const revenue = item.quantity * item.price
+    revenueByMonth[monthKey] = (revenueByMonth[monthKey] || 0) + revenue
+  }
+
+  const result = Object.entries(revenueByMonth)
+    .map(([month, revenue]) => ({ month, revenue }))
+    .sort((a, b) => new Date(a.month) - new Date(b.month))
+
+  res.json(result)
+}
+
+
+module.exports = { getRevenueSummary, getRevenueOverTime, getOrdersByCategory, getEngagementSummary, getRevenueByCategory, getTopCategoryAndProduct, getMonthlyRevenue }

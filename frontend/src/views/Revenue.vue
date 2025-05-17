@@ -41,6 +41,9 @@
 				<div class="card p-4 my-4 shadow-sm">
 					<OrdersByCategoryChart :data="categoryOrders" />
 				</div>
+				<div class="card p-4 my-4 shadow-sm">
+					<MonthlyRevenueChart :data="monthlyGrowth" />
+				</div>
 			</div>
 		</div>
 	</div>
@@ -55,12 +58,14 @@ import OrdersByCategoryChart from '../components/charts/OrdersByCategoryChart.vu
 import EngagementCard from '../components/card/EngagementCard.vue'
 import RevenueByCategoryChart from '../components/charts/RevenueByCategoryChart.vue'
 import TopSingleHighlights from '..//components/charts/TopSingleHighlights.vue'
+import MonthlyRevenueChart from '../components/charts/MonthlyRevenueChart.vue'
 
 const summary = ref(null)
 const revenueData = ref([])
 const categoryOrders = ref([])
 const revenueSplit = ref([])
 const topHighlight = ref({ topCategory: {}, topProduct: {} })
+const monthlyGrowth = ref([])
 
 onMounted(async () => {
 	const res_summary = await fetch(`${import.meta.env.VITE_API_URL}/api/revenue/summary`)
@@ -73,7 +78,9 @@ onMounted(async () => {
 	revenueSplit.value = await res_rev_catg.json()
 	const res_top = await fetch(`${import.meta.env.VITE_API_URL}/api/revenue/top-single`)
 	topHighlight.value = await res_top.json()
-	console.log(topHighlight.value);
+	const res_monthly = await fetch(`http://localhost:3000/api/revenue/monthly-revenue`)
+	monthlyGrowth.value = await res_monthly.json()
+
 
 })
 </script>
