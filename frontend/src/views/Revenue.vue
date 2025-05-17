@@ -63,7 +63,7 @@ const revenueSplit = ref([])
 const topHighlight = ref({ topCategory: {}, topProduct: {} })
 
 onMounted(async () => {
-	const res_summary = await fetch(`${import.meta.env.VITE_API_URL}/api/revenue/summary0`)
+	const res_summary = await fetch(`${import.meta.env.VITE_API_URL}/api/revenue/summary`)
 	summary.value = await res_summary.json()
 	const res_rev = await fetch(`${import.meta.env.VITE_API_URL}/api/revenue/sales-over-time?groupBy=daily`)
 	revenueData.value = await res_rev.json()
