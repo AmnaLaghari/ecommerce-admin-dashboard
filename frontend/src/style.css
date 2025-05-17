@@ -204,7 +204,7 @@
 
 .chart {
   width: 100%;
-  height: 350px;
+  height: 370px;
 }
 
 .progress-circle {
@@ -221,4 +221,12 @@
 .circle span {
   font-size: 1.5rem;
   font-weight: bold;
+}
+
+.pie-chart {
+  height: 510px !important
+}
+
+.bar-chart {
+  height: 220px !important
 }

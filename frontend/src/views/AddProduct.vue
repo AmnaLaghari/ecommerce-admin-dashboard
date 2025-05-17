@@ -74,7 +74,6 @@
   
   function handleImageUpload(event) {
     const file = event.target.files[0]
-    console.log(file)
     if (file) {
       product.value.images = file
       imagePreview.value = URL.createObjectURL(file)
@@ -82,7 +81,6 @@
   }
   
   async function submitProduct() {
-    console.log(product)
     const formData = new FormData()
     formData.append('name', product.value.name)
     formData.append('description', product.value.description)
@@ -92,7 +90,6 @@
     formData.append('images', product.value.images)
 
     try {
-      console.log(formData)
       const res = await fetch(`${import.meta.env.VITE_API_URL}/api/products`, {
         method: 'POST',
         body: formData
