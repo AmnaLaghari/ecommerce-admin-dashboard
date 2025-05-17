@@ -93,7 +93,6 @@ async function main() {
   const today = new Date()
 
   const { PrismaClient } = require('@prisma/client');
-  const prisma = new PrismaClient();
 
   const products = [product1, product2, product3, product4, product5, product6, product7, product8];
   let buyerIdCounter = 1000;
