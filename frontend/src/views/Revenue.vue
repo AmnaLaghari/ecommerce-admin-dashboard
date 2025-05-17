@@ -44,6 +44,9 @@
 				<div class="card p-4 my-4 shadow-sm">
 					<MonthlyRevenueChart :data="monthlyGrowth" />
 				</div>
+				<div class="card p-4 my-4 shadow-sm">
+					<MonthlyRevenueChart :data="monthlyGrowth" />
+				</div>
 			</div>
 		</div>
 	</div>
