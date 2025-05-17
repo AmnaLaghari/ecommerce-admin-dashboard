@@ -21,7 +21,7 @@
 		</div>
 		<div class="row">
 			<div class="col-md-8">
-				<div class="card my-4 p-3 chart">
+				<div class="card my-4 p-3 chart shadow-sm">
 					<RevenueLineChart :data="revenueData" />
 				</div>
 			</div>
@@ -33,12 +33,12 @@
 		</div>
 		<div class="row">
 			<div class="col-md-6">
-				<div class="card p-4 my-4">
+				<div class="card p-4 my-4 shadow-sm">
 					<RevenueByCategoryChart :data="revenueSplit" />
 				</div>
 			</div>
 			<div class="col-md-6">
-				<div class="card p-4 my-4">
+				<div class="card p-4 my-4 shadow-sm">
 					<OrdersByCategoryChart :data="categoryOrders" />
 				</div>
 			</div>

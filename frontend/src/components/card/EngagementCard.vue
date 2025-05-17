@@ -1,5 +1,5 @@
 <template>
-    <div class="card p-4 d-flex flex-column align-items-center text-center">
+    <div class="card p-4 d-flex flex-column align-items-center text-center shadow-sm">
       <h5>Conversion Rate: {{ summary.conversionRate }}%</h5>
   
       <div class="d-flex justify-content-around w-100 my-3">

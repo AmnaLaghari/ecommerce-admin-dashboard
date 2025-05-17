@@ -17,6 +17,7 @@
               <th>Price</th>
               <th>Avg. Daily Sales</th>
               <th>stock</th>
+              <th>Stock Cover</th>
               <th>Date</th>
               <th>Actions</th>
             </tr>
@@ -26,14 +27,15 @@
               <th><img :src="product.images" alt="product image"  width="50px" height="50px"/></th>
               <th class="inventory-table-cols">{{ product.name }}</th>
               <th class="inventory-table-cols">{{ product.category }}</th>
-              <th class="inventory-table-cols">{{ product.price }}</th>
-              <th class="inventory-table-cols">{{ product.avgDailySales }}</th>
+              <th class="inventory-table-cols">${{ product.price }}</th>
+              <th class="inventory-table-cols text-center">{{ product.avgDailySales.toFixed(2) }}</th>
               <th class="inventory-table-cols">
                 {{ product.stock }}
                 <span :class="getStockStatus(product).class" class="ms-2 fw-bold">
                   ({{ getStockStatus(product).label }})
                 </span>
               </th>
+              <th class="inventory-table-cols text-center">{{ (product.stock / product.avgDailySales).toFixed(0) }}</th>
               <th class="inventory-table-cols">{{ product.createdAt }}</th>
               <th>
                 <button class="edit-btn" @click="openModal(product)">

@@ -11,8 +11,8 @@
 			/>
 
 			<div class="d-flex justify-content-end">
-				<button class="btn btn-secondary me-2" @click="closeModal">Cancel</button>
-				<button class="btn btn-primary" @click="saveStock">Update</button>
+				<button class="btn btn-secondary mx-2" @click="closeModal">Cancel</button>
+				<button class="btn btn-primary mx-2" @click="saveStock">Update</button>
 			</div>
 		</div>
 	</div>
