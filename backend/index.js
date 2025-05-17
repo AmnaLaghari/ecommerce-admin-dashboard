@@ -5,19 +5,12 @@ const PORT = 3000
 
 app.use(cors())
 app.use(express.json())
+app.use(express.urlencoded({ extended: true }))
 
-const products = require('./data/products.json')
-const orders = require('./data/orders.json')
-
-// Revenue endpoint
-app.get('/api/revenue', (req, res) => {
-  res.json(orders)
-})
-
-// Products endpoint
-app.get('/api/products', (req, res) => {
-  res.json(products)
-})
+const productRoutes = require('./routes/products')
+const revenueRoutes = require('./routes/revenue')
+app.use('/api/products', productRoutes)
+app.use('/api/revenue', revenueRoutes)
 
 app.listen(PORT, () => {
   console.log(`Server running on http://localhost:${PORT}`)
