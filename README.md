@@ -69,3 +69,7 @@ npm run dev
 ## Notes
 - Sample data is generated for orders and visitors between April–July 2025.
 - Product additions are persisted via Prisma and affect inventory stats in real time.
+
+--- 
+### Live Link
+[Ecommerce Admin Dashboard](https://ecommerce-admin-dashboard-1.onrender.com)
