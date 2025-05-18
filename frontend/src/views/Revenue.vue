@@ -10,7 +10,10 @@
 				<KpiCard title="Total Orders" :value="summary.totalOrders" icon="shopping-cart" />
 			</div>
 			<div class="col-md-2">
-				<KpiCard title="Revenue" :value="`$ ${summary.totalRevenue.toFixed(0)}`" icon="money-bill" />
+				<KpiCard title="Revenue" :value="`$ ${summary.totalRevenue.toLocaleString(undefined, {
+                            minimumFractionDigits: 0,
+                            maximumFractionDigits: 0
+                        })}`" icon="money-bill" />
 			</div>
 			<div class="col-md-2">
 				<KpiCard title="Avg Order Value" :value="`$ ${summary.avgOrderValue.toFixed(0)}`" icon="chart-line" />
@@ -40,9 +43,6 @@
 			<div class="col-md-6">
 				<div class="card p-4 my-4 shadow-sm">
 					<OrdersByCategoryChart :data="categoryOrders" />
-				</div>
-				<div class="card p-4 my-4 shadow-sm">
-					<MonthlyRevenueChart :data="monthlyGrowth" />
 				</div>
 				<div class="card p-4 my-4 shadow-sm">
 					<MonthlyRevenueChart :data="monthlyGrowth" />
